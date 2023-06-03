@@ -1,0 +1,15 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - go build -o ./tmp/toggl .
+    sources:
+      - ./**/*
+  check:
+    cmds:
+      - go fmt ./...
+      - go vet ./...
+      - docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:v1.53.1 golangci-lint run -v
